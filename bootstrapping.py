@@ -21,6 +21,7 @@ __version__ = '0.1.0'
 from Bio import Phylo
 from Bio import AlignIO
 from Bio.Phylo.Consensus import *
+import argparse
 
 """
 # ==============================================================================
@@ -50,12 +51,12 @@ def parse(parameters):
 """
 # ==============================================================================
 
-MAIN
+RUN
 
 # ==============================================================================
 """
 
-def main():
+def run():
 
     inputAlignment = AlignIO.read('msa.fasta', 'fasta')
     multipleSequenceAlignments = bootstrap(inputAlignment, 7) # generate bootstrap
@@ -64,6 +65,18 @@ def main():
         print(alignment)
 	    
     print("\nDone!")
+
+
+"""
+# ==============================================================================
+
+MAIN
+
+# ==============================================================================
+"""
+
+def main():
+
 
 """
 # =============================================================================
