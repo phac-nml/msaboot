@@ -32,11 +32,24 @@ GLOBALS
 """
 
 PROGRAM_DESCRIPTION = "This program bootstraps multiple sequence alignment data."
+PROGRAM_USAGE = "%(prog)s -i INPUT_LOCATION -o OUTPUT_LOCATION"
 
 # ARGUMENTS #
 
 LONG = "--"
 SHORT = "-"
+
+# REQUIRED ARGUMENTS #
+
+# Version number
+VERSION = 'version'
+VERSION_SHORT = SHORT + 'V'
+VERSION_LONG = LONG + VERSION
+
+INPUT_LOCATION = ""
+
+OUTPUT_LOCATION = ""
+
 
 """
 # ==============================================================================
@@ -53,10 +66,10 @@ Runs the script.
 INPUT
 -----
 
-[FILE LOCATION] [inputLocation]
+[FILE LOCATION] [INPUT_LOCATION]
     The file location of the FASTA multiple sequence alignment input.
 
-[FILE LOCATION] [output location]
+[FILE LOCATION] [OUTPUT_LOCATION]
     The file location to store output bootstrapped multiple sequence alignment data.
 
 RETURN
@@ -105,6 +118,7 @@ def parse(parameters):
 # ==============================================================================
 
 MAIN
+----
 
 PURPOSE
 -------
@@ -114,6 +128,19 @@ Adds arguments to parser, calls parse function.
 """
 
 def main():
+
+    # --- PARSER --- #
+    parser = argparse.ArgumentParser(
+        description=PROGRAM_DESCRIPTION,
+        usage=PROGRAM_USAGE)
+
+    # --- VERSION --- #
+    parser.add_argument(
+        VERSION_SHORT,
+        VERSION_LONG,
+        action='version',
+        version='%(prog)s ' + str(__version__))
+
 
     parse(None) #todo
 
