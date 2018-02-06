@@ -102,15 +102,22 @@ The bootstrapped FASTA data will be generated and written to [outputLocation].
 
 def run(inputLocation, outputLocation, numBootstraps):
 
+    #input
     if not os.path.isfile(inputLocation):
         raise RuntimeError(
             "ERROR: Could not open input file: " + inputLocation + "\n")
 
-    inputAlignment = AlignIO.read(inputLocation, 'fasta')
-    multipleSequenceAlignments = bootstrap(inputAlignment, int(numBootstraps)) # generate bootstrap
+    print("Reading from input file " + inputLocation)
 
-    for alignment in multipleSequenceAlignments:
-        print(alignment)
+    #bootstrapping
+
+    inputAlignment = AlignIO.read(inputLocation, 'fasta')
+    bootstrapAlignments = bootstrap(inputAlignment, int(numBootstraps)) # generate bootstrap
+
+    #output
+    print("Writing to output file " + outputLocation)
+
+    AlignIO.write(bootstrapAlignments, outputLocation, "phylip")
 
 
 """
@@ -128,10 +135,12 @@ Get parameters from parser, call run function
 
 def parse(parameters):
 
+    #get parameters inputted from command line
     inputLocation = parameters.get(INPUT)
     outputLocation = parameters.get(OUTPUT)
     numBootstraps = parameters.get(NUMBER)
 
+    #run bootstrapping program with above parameters
     run(inputLocation, outputLocation, numBootstraps)
 
 
