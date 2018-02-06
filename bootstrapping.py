@@ -41,17 +41,33 @@ SHORT = "-"
 """
 # ==============================================================================
 
-PARSE
-
-# ==============================================================================
-"""
-
-def parse(parameters):
-
-"""
-# ==============================================================================
-
 RUN
+---
+
+
+PURPOSE
+-------
+
+Runs the script.
+
+INPUT
+-----
+
+[FILE LOCATION] [inputLocation]
+    The file location of the FASTA multiple sequence alignment input.
+
+[FILE LOCATION] [output location]
+    The file location to store output bootstrapped multiple sequence alignment data.
+
+RETURN
+------
+
+[NONE]
+
+POST
+----
+
+The bootstrapped FASTA data will be generated and written to [outputLocation].
 
 # ==============================================================================
 """
@@ -70,12 +86,33 @@ def run():
 """
 # ==============================================================================
 
+PARSE
+-----
+
+PURPOSE
+-----
+Get parameters from parser, call run function
+
+# ==============================================================================
+"""
+
+def parse(parameters):
+
+
+"""
+# ==============================================================================
+
 MAIN
+
+PURPOSE
+-------
+Adds arguments to parser, calls parse function.
 
 # ==============================================================================
 """
 
 def main():
+
 
 
 """
