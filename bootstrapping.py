@@ -98,6 +98,8 @@ Get parameters from parser, call run function
 
 def parse(parameters):
 
+    run()
+
 
 """
 # ==============================================================================
@@ -113,7 +115,7 @@ Adds arguments to parser, calls parse function.
 
 def main():
 
-
+    parse(None) #todo
 
 """
 # =============================================================================
