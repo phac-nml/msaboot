@@ -22,6 +22,7 @@ from Bio import Phylo
 from Bio import AlignIO
 from Bio.Phylo.Consensus import *
 import argparse
+import os
 
 """
 # ==============================================================================
@@ -32,7 +33,7 @@ GLOBALS
 """
 
 PROGRAM_DESCRIPTION = "This program bootstraps multiple sequence alignment data."
-PROGRAM_USAGE = "%(prog)s -i INPUT_LOCATION -o OUTPUT_LOCATION"
+PROGRAM_USAGE = "%(prog)s -i INPUT_LOCATION -o OUTPUT_LOCATION -n NUM_BOOTSTRAPS"
 
 # ARGUMENTS #
 
@@ -42,13 +43,24 @@ SHORT = "-"
 # REQUIRED ARGUMENTS #
 
 # Version number
-VERSION = 'version'
-VERSION_SHORT = SHORT + 'V'
+VERSION = "version"
+VERSION_SHORT = SHORT + "V"
 VERSION_LONG = LONG + VERSION
 
-INPUT_LOCATION = ""
+INPUT = "input"
+INPUT_SHORT = SHORT + "i"
+INPUT_LONG = LONG + INPUT
+INPUT_HELP = "The file name of the FASTA file to be used as input."
 
-OUTPUT_LOCATION = ""
+OUTPUT = "output"
+OUTPUT_SHORT = SHORT + "o"
+OUTPUT_LONG = LONG + OUTPUT
+OUTPUT_HELP = "The file name of the bootstrapped alignment data output."
+
+NUMBER = "number"
+NUMBER_SHORT = SHORT + "n"
+NUMBER_LONG = LONG + NUMBER
+NUMBER_HELP = "The number of times the input multiple sequence alignments will be bootstrapped."
 
 
 """
@@ -66,11 +78,14 @@ Runs the script.
 INPUT
 -----
 
-[FILE LOCATION] [INPUT_LOCATION]
+[FILE LOCATION] [inputLocation]
     The file location of the FASTA multiple sequence alignment input.
 
-[FILE LOCATION] [OUTPUT_LOCATION]
+[FILE LOCATION] [outputLocation]
     The file location to store output bootstrapped multiple sequence alignment data.
+
+[FILE LOCATION] [numBootstraps]
+    The number of times bootstrapping will be performed on the multiple sequence alignment data.
 
 RETURN
 ------
@@ -85,15 +100,17 @@ The bootstrapped FASTA data will be generated and written to [outputLocation].
 # ==============================================================================
 """
 
-def run():
+def run(inputLocation, outputLocation, numBootstraps):
 
-    inputAlignment = AlignIO.read('msa.fasta', 'fasta')
-    multipleSequenceAlignments = bootstrap(inputAlignment, 7) # generate bootstrap
+    if not os.path.isfile(inputLocation):
+        raise RuntimeError(
+            "ERROR: Could not open input file: " + inputLocation + "\n")
+
+    inputAlignment = AlignIO.read(inputLocation, 'fasta')
+    multipleSequenceAlignments = bootstrap(inputAlignment, int(numBootstraps)) # generate bootstrap
 
     for alignment in multipleSequenceAlignments:
         print(alignment)
-	    
-    print("\nDone!")
 
 
 """
@@ -111,7 +128,11 @@ Get parameters from parser, call run function
 
 def parse(parameters):
 
-    run()
+    inputLocation = parameters.get(INPUT)
+    outputLocation = parameters.get(OUTPUT)
+    numBootstraps = parameters.get(NUMBER)
+
+    run(inputLocation, outputLocation, numBootstraps)
 
 
 """
@@ -141,8 +162,37 @@ def main():
         action='version',
         version='%(prog)s ' + str(__version__))
 
+    # --- INPUT --- #
+    parser.add_argument(
+        INPUT_SHORT,
+        INPUT_LONG,
+        dest = INPUT,
+        help = INPUT_HELP,
+        type=str, required=True)
 
-    parse(None) #todo
+    # --- OUTPUT --- #
+    parser.add_argument(
+        OUTPUT_SHORT,
+        OUTPUT_LONG,
+        dest = OUTPUT,
+        help = OUTPUT_HELP,
+        type=str, required=True)
+
+    # --- NUMBER --- #
+    parser.add_argument(
+        NUMBER_SHORT,
+        NUMBER_LONG,
+        dest = NUMBER,
+        help = NUMBER_HELP,
+        type=str, required=True)
+
+    args = parser.parse_args()
+    parameters = vars(args)
+
+    print("Bootstrapping v" + str(__version__) + "\n")
+    parse(parameters)
+
+    print("\nComplete!")
 
 """
 # =============================================================================
