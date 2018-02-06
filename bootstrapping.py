@@ -32,13 +32,46 @@ GLOBALS
 
 PROGRAM_DESCRIPTION = "This program bootstraps multiple sequence alignment data."
 
-inputAlignment = AlignIO.read('msa.fasta', 'fasta')
-multipleSequenceAlignments = bootstrap(inputAlignment, 7) # generate bootstrap
+# ARGUMENTS #
 
-for alignment in multipleSequenceAlignments:
-    print(alignment)
-    
+LONG = "--"
+SHORT = "-"
 
-print("\nDone!")
+"""
+# ==============================================================================
+
+PARSE
+
+# ==============================================================================
+"""
+
+def parse(parameters):
+
+"""
+# ==============================================================================
+
+MAIN
+
+# ==============================================================================
+"""
+
+def main():
+
+    inputAlignment = AlignIO.read('msa.fasta', 'fasta')
+    multipleSequenceAlignments = bootstrap(inputAlignment, 7) # generate bootstrap
+
+    for alignment in multipleSequenceAlignments:
+        print(alignment)
+	    
+    print("\nDone!")
+
+"""
+# =============================================================================
+# =============================================================================
+"""
+if __name__ == '__main__':
+
+    main()
+
 
 
