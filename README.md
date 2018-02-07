@@ -1,5 +1,20 @@
+## Introduction ##
+
+This tool can be used to generate bootstrapped replicates of multiple sequence alignments.
+
+## Release ##
+
+MSABOOT 0.1.0
+
+This is the first release of this tool.
+
+## Installation ##
+
+Requires Python3 and pip3.
+
+    pip3 install .
+
 ## Legal ##
------------
 
 Copyright Government of Canada 2018
 
@@ -17,7 +32,6 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 
 ## Contact ##
--------------
 
 **Gary van Domselaar**: gary.vandomselaar@canada.ca
 

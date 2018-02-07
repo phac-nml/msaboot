@@ -3,9 +3,9 @@ from setuptools import find_packages, setup
 dependencies = ['numpy', 'biopython']
 
 setup(
-    name='bootstrapping',
+    name='msaboot',
     version='0.1.0',
-    url='https://github.com/phac-nml/bootstrapping.git',
+    url='https://github.com/phac-nml/msaboot.git',
     license='Apache-2.0',
     author='Matthew Fogel',
     author_email='matthew.fogel@canada.ca',
@@ -18,7 +18,7 @@ setup(
     install_requires=dependencies,
     entry_points={
         'console_scripts': [
-            'bootstrapping = bootstrapping.bootstrapping:main',
+            'msaboot = msaboot.msaboot:main',
         ],
     },
 )
