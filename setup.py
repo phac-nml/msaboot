@@ -18,7 +18,7 @@ setup(
     install_requires=dependencies,
     entry_points={
         'console_scripts': [
-            'bootstrapping = bootstrapping.Bootstrapping:main',
+            'bootstrapping = bootstrapping.bootstrapping:main',
         ],
     },
 )
