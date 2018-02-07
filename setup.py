@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-dependencies = ['python', 'numpy', 'biopython']
+dependencies = ['numpy', 'biopython']
 
 setup(
     name='bootstrapping',
@@ -11,7 +11,7 @@ setup(
     author_email='matthew.fogel@canada.ca',
     description='Creates bootstrapping replicates from FASTA file.',
     long_description=__doc__,
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests']),
     include_package_data=True,
     zip_safe=False,
     platforms='any',
