@@ -199,7 +199,7 @@ def main():
     args = parser.parse_args()
     parameters = vars(args)
 
-    print("Bootstrapping v" + str(__version__) + "\n")
+    print("msaboot v" + str(__version__) + "\n")
     parse(parameters)
 
     print("\nComplete!")
