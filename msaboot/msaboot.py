@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """
 # ==============================================================================
 Copyright Government of Canada 2018
@@ -118,7 +120,7 @@ def run(inputLocation, outputLocation, numBootstraps):
     # output
     print("Writing to output file " + outputLocation)
 
-    AlignIO.write(bootstrapAlignments, outputLocation, "phylip")
+    AlignIO.write(bootstrapAlignments, outputLocation, "phylip-sequential")
 
 
 """
