@@ -6,7 +6,7 @@ This tool can be used to generate bootstrapped replicates of multiple sequence a
 
 MSABOOT 0.1.1
 
-This is the first release of this tool.
+This release included a bug fix for the output.
 
 ## Installation ##
 
