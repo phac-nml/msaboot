@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """
 # ==============================================================================
 Copyright Government of Canada 2018
@@ -16,7 +18,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 # ==============================================================================
 """
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 from Bio import Phylo
 from Bio import AlignIO
@@ -118,7 +120,7 @@ def run(inputLocation, outputLocation, numBootstraps):
     # output
     print("Writing to output file " + outputLocation)
 
-    AlignIO.write(bootstrapAlignments, outputLocation, "phylip")
+    AlignIO.write(bootstrapAlignments, outputLocation, "phylip-sequential")
 
 
 """
