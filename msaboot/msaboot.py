@@ -18,10 +18,11 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 # ==============================================================================
 """
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 from Bio import Phylo
 from Bio import AlignIO
+from Bio.Align import MultipleSeqAlignment
 from Bio.Phylo.Consensus import *
 import argparse
 import os
@@ -114,13 +115,37 @@ def run(inputLocation, outputLocation, numBootstraps):
     # bootstrapping
 
     inputAlignment = AlignIO.read(inputLocation, 'fasta')
+
+    seq_length = inputAlignment.get_alignment_length()
+
+    #check that sequences are all the same length
+    if len(inputAlignment) == 0:
+        raise ValueError("The input file must contain at least one sequence.")
+    if seq_length <= 0:
+        raise ValueError("Non empty sequences are required")
+    for record in inputAlignment:
+        if seq_length != len(record.seq):
+            raise ValueError("Sequences must be all the same length")
+        #end if
+    #end if
+
     # generate bootstrap
     bootstrapAlignments = bootstrap(inputAlignment, int(numBootstraps))
 
-    # output
-    print("Writing to output file " + outputLocation)
+    count = 0
 
-    AlignIO.write(bootstrapAlignments, outputLocation, "phylip-sequential")
+    file = open(outputLocation, 'w')
+    for alignment in bootstrapAlignments:
+        if count>0:
+            file.write("\n")
+        #end if
+        file.write(" %i %s\n" % (len(alignment), seq_length))
+        #for each sequence record write the sequence name, a space, and the sequence itself
+        file.write('\n'.join([(str(record.id) + " " + str(record.seq)) for record in alignment]))
+        count += 1
+
+    # output
+    print("Wrote to output file " + outputLocation)
 
 
 """

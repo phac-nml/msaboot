@@ -4,7 +4,7 @@ dependencies = ['numpy', 'biopython']
 
 setup(
     name='msaboot',
-    version='0.1.1',
+    version='0.1.2',
     url='https://github.com/phac-nml/msaboot.git',
     license='Apache-2.0',
     author='Matthew Fogel',
