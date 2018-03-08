@@ -98,7 +98,7 @@ RETURN
 POST
 ----
 
-The bootstrapped FASTA data will be generated and written to [outputLocation].
+The bootstrapped FASTA data will be generated and output_phylip will be called.
 
 # ==============================================================================
 """
@@ -116,13 +116,13 @@ def run(inputLocation, outputLocation, numBootstraps):
 
     inputAlignment = AlignIO.read(inputLocation, 'fasta')
 
-    seq_length = inputAlignment.get_alignment_length()
-
-    #check that sequences are all the same length
     if len(inputAlignment) == 0:
         raise ValueError("The input file must contain at least one sequence.")
+
+    seq_length = inputAlignment.get_alignment_length()
     if seq_length <= 0:
         raise ValueError("Non empty sequences are required")
+    #check that sequences are all the same length
     for record in inputAlignment:
         if seq_length != len(record.seq):
             raise ValueError("Sequences must be all the same length")
@@ -131,6 +131,47 @@ def run(inputLocation, outputLocation, numBootstraps):
 
     # generate bootstrap
     bootstrapAlignments = bootstrap(inputAlignment, int(numBootstraps))
+
+    output_phylip(bootstrapAlignments, outputLocation, seq_length)
+
+"""
+# ==============================================================================
+
+OUTPUT_PHYLIP
+---
+
+
+PURPOSE
+-------
+
+Outputs a phylip file with the bootstrapped data.
+
+INPUT
+-----
+
+[GENERATOR OF MULTIPLESEQALIGNMENT OBJECTS] [inputAlignment]
+    The bootstrapped data.
+
+[FILE LOCATION] [outputLocation]
+    The output location to store bootstrapped multiple sequence alignment data.
+
+[INT] [seq_length]
+    Alignment length for sequences.
+
+RETURN
+------
+
+[NONE]
+
+POST
+----
+
+The bootstrapped FASTA data will be written to [outputLocation].
+
+# ==============================================================================
+"""
+
+def output_phylip(bootstrapAlignments, outputLocation, seq_length):
 
     count = 0
 
@@ -146,7 +187,6 @@ def run(inputLocation, outputLocation, numBootstraps):
 
     # output
     print("Wrote to output file " + outputLocation)
-
 
 """
 # ==============================================================================
