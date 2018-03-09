@@ -1,6 +1,7 @@
 ## Introduction ##
 
 This tool can be used to generate bootstrapped replicates of multiple sequence alignments.
+The bootstrapped replicates are saved in relaxed PHYLIP format.
 
 ## Release ##
 
@@ -35,4 +36,3 @@ specific language governing permissions and limitations under the License.
 ## Contact ##
 
 **Gary van Domselaar**: gary.vandomselaar@canada.ca
-

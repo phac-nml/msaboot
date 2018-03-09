@@ -58,7 +58,8 @@ INPUT_HELP = "The file name of the FASTA file to be used as input."
 OUTPUT = "output"
 OUTPUT_SHORT = SHORT + "o"
 OUTPUT_LONG = LONG + OUTPUT
-OUTPUT_HELP = "The file name of the bootstrapped alignment data output."
+OUTPUT_HELP = "The file name of the bootstrapped alignment data output, stored"
+            + " in relaxed PHYLIP format."
 
 NUMBER = "number"
 NUMBER_SHORT = SHORT + "n"
@@ -98,7 +99,8 @@ RETURN
 POST
 ----
 
-The bootstrapped FASTA data will be generated and output_phylip will be called.
+The bootstrapped FASTA data will be generated and written to [outputLocation]
+in relaxed PHYLIP format.
 
 # ==============================================================================
 """
@@ -132,19 +134,19 @@ def run(inputLocation, outputLocation, numBootstraps):
     # generate bootstrap
     bootstrapAlignments = bootstrap(inputAlignment, int(numBootstraps))
 
-    output_phylip(bootstrapAlignments, outputLocation, seq_length)
+    output_relaxed_phylip(bootstrapAlignments, outputLocation, seq_length)
 
 """
 # ==============================================================================
 
-OUTPUT_PHYLIP
+output_relaxed_phylip
 ---
 
 
 PURPOSE
 -------
 
-Outputs a phylip file with the bootstrapped data.
+Outputs a relaxed PHYLIP format file with the bootstrapped data.
 
 INPUT
 -----
@@ -153,7 +155,8 @@ INPUT
     The bootstrapped data.
 
 [FILE LOCATION] [outputLocation]
-    The output location to store bootstrapped multiple sequence alignment data.
+    The output location to store bootstrapped multiple sequence alignment data
+    in bootstrapped relaxed PHYLIP format.
 
 [INT] [seq_length]
     Alignment length for sequences.
@@ -166,12 +169,13 @@ RETURN
 POST
 ----
 
-The bootstrapped FASTA data will be written to [outputLocation].
+The bootstrapped FASTA data will be written to [outputLocation] in
+relaxed PHYLIP format.
 
 # ==============================================================================
 """
 
-def output_phylip(bootstrapAlignments, outputLocation, seq_length):
+def output_relaxed_phylip(bootstrapAlignments, outputLocation, seq_length):
 
     count = 0
 
@@ -186,7 +190,7 @@ def output_phylip(bootstrapAlignments, outputLocation, seq_length):
         count += 1
 
     # output
-    print("Wrote to output file " + outputLocation)
+    print("Wrote to output file " + outputLocation + " in relaxed PHYLIP format.")
 
 """
 # ==============================================================================
