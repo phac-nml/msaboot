@@ -178,11 +178,12 @@ def output_relaxed_phylip(bootstrapAlignments, outputLocation, seq_length):
 
     file = open(outputLocation, 'w')
 
-    for i in range(0, len(bootstrapAlignments)):
+    bootstrapList = list(bootstrapAlignments)
+    for i in range(0, len(bootstrapList)):
         if i > 0:
             file.write("\n")
 
-        alignment = bootstrapAlignments[i]
+        alignment = bootstrapList[i]
 
         file.write(" %i %s\n" % (len(alignment), seq_length))
         #for each sequence record write the sequence name, a space, and the sequence itself
