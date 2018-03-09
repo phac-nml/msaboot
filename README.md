@@ -7,8 +7,7 @@ The bootstrapped replicates are saved in relaxed PHYLIP format.
 
 MSABOOT 0.1.2
 
-This release replaced the use of Biopython's AlignIO.write function with a custom implementation
-due to a bug in AlignIO.write when given a sequence name of ten or more characters.
+This release replaced the use of Biopython's AlignIO.write function with a custom implementation.
 
 ## Installation ##
 
