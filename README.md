@@ -1,12 +1,14 @@
 ## Introduction ##
 
 This tool can be used to generate bootstrapped replicates of multiple sequence alignments.
+The bootstrapped replicates are saved in relaxed PHYLIP format.
 
 ## Release ##
 
-MSABOOT 0.1.1
+MSABOOT 0.1.2
 
-This release included a bug fix for the output.
+This release replaced the use of Biopython's AlignIO.write function with a custom implementation
+due to a bug in AlignIO.write when given a sequence name of ten or more characters.
 
 ## Installation ##
 
@@ -34,4 +36,3 @@ specific language governing permissions and limitations under the License.
 ## Contact ##
 
 **Gary van Domselaar**: gary.vandomselaar@canada.ca
-
