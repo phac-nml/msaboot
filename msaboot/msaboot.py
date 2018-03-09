@@ -177,17 +177,18 @@ relaxed PHYLIP format.
 
 def output_relaxed_phylip(bootstrapAlignments, outputLocation, seq_length):
 
-    count = 0
-
     file = open(outputLocation, 'w')
-    for alignment in bootstrapAlignments:
-        if count>0:
+
+    for i in range(0, len(bootstrapAlignments))
+        if i > 0:
             file.write("\n")
-        #end if
+
+        alignment = bootstrapAlignments[i]
+
         file.write(" %i %s\n" % (len(alignment), seq_length))
         #for each sequence record write the sequence name, a space, and the sequence itself
         file.write('\n'.join([(str(record.id) + " " + str(record.seq)) for record in alignment]))
-        count += 1
+    #end if
 
     # output
     print("Wrote to output file " + outputLocation + " in relaxed PHYLIP format.")
