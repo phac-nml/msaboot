@@ -58,8 +58,7 @@ INPUT_HELP = "The file name of the FASTA file to be used as input."
 OUTPUT = "output"
 OUTPUT_SHORT = SHORT + "o"
 OUTPUT_LONG = LONG + OUTPUT
-OUTPUT_HELP = "The file name of the bootstrapped alignment data output, stored"
-            + " in relaxed PHYLIP format."
+OUTPUT_HELP = "The file name of the bootstrapped alignment data output, stored in relaxed PHYLIP format."
 
 NUMBER = "number"
 NUMBER_SHORT = SHORT + "n"
@@ -179,7 +178,7 @@ def output_relaxed_phylip(bootstrapAlignments, outputLocation, seq_length):
 
     file = open(outputLocation, 'w')
 
-    for i in range(0, len(bootstrapAlignments))
+    for i in range(0, len(bootstrapAlignments)):
         if i > 0:
             file.write("\n")
 
